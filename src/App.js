@@ -22,11 +22,23 @@ class App extends Component {
       }
     ]
   };
+
+  //prop drilling thsi.props.markComplete from TodoItem to Todos to App where the state is located.
+  markComplete = id => {
+    //able to change the state of id
+    this.setState({
+      todos: this.state.todos.map(todo => {
+        if (todo.id === id) {
+          todo.completed = !todo.completed;
+        }
+        return todo;
+      })
+    });
+  };
   render() {
     return (
       <div className="App">
-        <Todos todos={this.state.todos} />
-        <h1>App</h1>
+        <Todos todos={this.state.todos} markComplete={this.markComplete} />
       </div>
     );
   }
